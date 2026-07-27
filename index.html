@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>张百川 — AI产品经理 | 个人作品集</title>
+<meta name="description" content="张百川的个人作品集 — 深耕教育垂直领域的AI产品经理,具备医疗教育产品0-1全生命周期管理经验。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg-2: #0f0f17;
+  --surface: rgba(255,255,255,0.025);
+  --surface-hover: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.07);
+  --border-hover: rgba(255,255,255,0.15);
+  --text: #f0f0f5;
+  --text-2: #9a9aa5;
+  --text-3: #5c5c66;
+  --violet: #9282F8;
+  --violet-dim: rgba(146,130,248,0.12);
+  --gold: #F3CA4D;
+  --gold-dim: rgba(243,202,77,0.12);
+  --gradient: linear-gradient(96.09deg, #9282F8 12.17%, #F3CA4D 90.71%);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --max-w: 1080px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection { background: var(--violet); color: #fff; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* Ambient orbs */
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.orb {
+  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15;
+}
+.orb-1 { width: 600px; height: 600px; background: var(--violet); top: -200px; left: -150px; animation: float1 20s ease-in-out infinite; }
+.orb-2 { width: 500px; height: 500px; background: var(--gold); top: 30%; right: -200px; animation: float2 25s ease-in-out infinite; }
+.orb-3 { width: 400px; height: 400px; background: #6d28d9; bottom: -100px; left: 30%; animation: float3 30s ease-in-out infinite; }
+@keyframes float1 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(80px,60px); } }
+@keyframes float2 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-60px,80px); } }
+@keyframes float3 { 0%,100% { transform: translate(0,0); } 50% { transform: translate(40px,-60px); } }
+
+/* Container */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+@media (min-width: 768px) { .container { padding: 0 40px; } }
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 0; transition: all 0.4s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(10,10,15,0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; }
+.nav-logo {
+  font-family: "Fraunces", "Noto Serif SC", serif;
+  font-size: 20px; font-weight: 500; color: var(--text);
+  text-decoration: none; letter-spacing: -0.02em;
+}
+.nav-logo span { color: var(--violet); }
+.nav-links { display: none; gap: 32px; align-items: center; }
+@media (min-width: 768px) { .nav-links { display: flex; } }
+.nav-links a {
+  color: var(--text-2); text-decoration: none; font-size: 14px;
+  font-weight: 400; transition: color 0.3s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+  background: var(--gradient); transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { width: 100%; }
+
+/* Hero */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 0 80px; position: relative;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center;
+}
+@media (min-width: 768px) { .hero-grid { grid-template-columns: 1fr 1fr; gap: 64px; } }
+.hero-text { display: flex; flex-direction: column; gap: 24px; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px;
+  font-size: 13px; color: var(--text-2); width: fit-content;
+  background: var(--surface);
+}
+.hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 {
+  font-family: "Noto Serif SC", "Fraunces", serif;
+  font-size: 48px; font-weight: 600; line-height: 1.1;
+  letter-spacing: -0.03em; color: var(--text);
+}
+@media (min-width: 640px) { .hero h1 { font-size: 64px; } }
+@media (min-width: 1024px) { .hero h1 { font-size: 80px; } }
+.hero h1 .gradient-text {
+  background: var(--gradient); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; font-style: italic;
+}
+.hero-subtitle {
+  font-size: 18px; color: var(--text-2); max-width: 480px; line-height: 1.8;
+}
+@media (min-width: 640px) { .hero-subtitle { font-size: 20px; } }
+.hero-meta { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+.hero-meta-item { display: flex; align-items: center; gap: 8px; color: var(--text-2); font-size: 14px; }
+.hero-meta-item svg { width: 16px; height: 16px; stroke: var(--violet); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 8px; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 14px 28px; border-radius: 999px; text-decoration: none;
+  background: var(--gradient); color: #0a0a0f;
+  font-size: 15px; font-weight: 600; transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 20px rgba(146,130,248,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(146,130,248,0.5); }
+.btn-primary svg { width: 16px; height: 16px; }
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 24px; border-radius: 999px; text-decoration: none;
+  border: 1px solid var(--border); color: var(--text);
+  font-size: 15px; font-weight: 500; transition: all 0.3s;
+  background: var(--surface);
+}
+.btn-ghost:hover { border-color: var(--border-hover); background: var(--surface-hover); transform: translateY(-2px); }
+.btn-ghost svg { width: 18px; height: 18px; }
+
+/* Hero visual */
+.hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+.avatar-ring {
+  width: 280px; height: 280px; border-radius: 50%;
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+@media (min-width: 640px) { .avatar-ring { width: 340px; height: 340px; } }
+.avatar-ring::before {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--violet), var(--gold), var(--violet));
+  animation: spin 8s linear infinite; opacity: 0.6;
+}
+.avatar-ring::after {
+  content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--bg);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.avatar-inner {
+  position: relative; z-index: 2; width: 85%; height: 85%; border-radius: 50%;
+  background: var(--bg-2); display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); overflow: hidden;
+}
+.avatar-char {
+  font-family: "Noto Serif SC", serif;
+  font-size: 120px; font-weight: 600;
+  background: var(--gradient); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@media (min-width: 640px) { .avatar-char { font-size: 140px; } }
+.avatar-status {
+  position: absolute; bottom: 12%; right: 12%; z-index: 3;
+  width: 20px; height: 20px; border-radius: 50%; background: #22c55e;
+  border: 4px solid var(--bg); box-shadow: 0 0 12px #22c55e;
+}
+
+/* Floating badges around avatar */
+.float-badge {
+  position: absolute; z-index: 4;
+  padding: 8px 14px; border-radius: 999px;
+  background: rgba(15,15,23,0.9); backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  font-size: 12px; color: var(--text-2); font-weight: 500;
+  display: flex; align-items: center; gap: 6px;
+  animation: floatBadge 4s ease-in-out infinite;
+}
+.float-badge .icon-dot { width: 6px; height: 6px; border-radius: 50%; }
+.badge-1 { top: 5%; right: -5%; animation-delay: 0s; }
+.badge-2 { bottom: 15%; left: -8%; animation-delay: 1.5s; }
+.badge-3 { top: 40%; right: -12%; animation-delay: 3s; }
+@keyframes floatBadge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+/* Scroll indicator */
+.scroll-ind {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--text-3); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+}
+.scroll-ind .mouse {
+  width: 24px; height: 40px; border: 2px solid var(--text-3); border-radius: 12px;
+  position: relative;
+}
+.scroll-ind .mouse::after {
+  content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 4px; height: 8px; background: var(--text-3); border-radius: 2px;
+  animation: scrollDot 2s infinite;
+}
+@keyframes scrollDot { 0% { opacity: 1; transform: translate(-50%,0); } 100% { opacity: 0; transform: translate(-50%,12px); } }
+
+/* Section */
+section { position: relative; z-index: 2; }
+.section-pad { padding: 100px 0; }
+.section-head { margin-bottom: 60px; }
+.section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: "Fraunces", serif; font-size: 13px; font-weight: 500;
+  color: var(--violet); letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.section-label::before { content: ''; width: 24px; height: 1px; background: var(--violet); }
+.section-title {
+  font-family: "Noto Serif SC", serif;
+  font-size: 32px; font-weight: 600; line-height: 1.3; letter-spacing: -0.02em;
+  color: var(--text); max-width: 640px;
+}
+@media (min-width: 768px) { .section-title { font-size: 44px; } }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 48px; }
+@media (min-width: 768px) { .about-grid { grid-template-columns: 1.2fr 1fr; gap: 64px; } }
+.about-text { display: flex; flex-direction: column; gap: 20px; }
+.about-text p { font-size: 17px; color: var(--text-2); line-height: 1.9; }
+.about-text .highlight {
+  background: var(--gradient); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; font-weight: 500;
+}
+.about-text .marker {
+  color: var(--text); font-weight: 500;
+}
+.skills-card {
+  padding: 32px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); position: relative; overflow: hidden;
+}
+.skills-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: var(--gradient); opacity: 0.5;
+}
+.skills-title {
+  font-family: "Fraunces", serif; font-size: 14px; font-weight: 500;
+  color: var(--text-2); letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.skills-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-badge {
+  padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px;
+  font-size: 13px; font-weight: 500; color: var(--text);
+  transition: all 0.3s; cursor: default; background: var(--surface);
+}
+.skill-badge:hover {
+  border-color: var(--violet); color: var(--violet);
+  transform: translateY(-2px); box-shadow: 0 4px 12px var(--violet-dim);
+}
+
+/* Experience */
+.exp-list { display: flex; flex-direction: column; gap: 0; position: relative; }
+.exp-line {
+  position: absolute; left: 20px; top: 20px; bottom: 20px; width: 1px;
+  background: linear-gradient(to bottom, var(--violet), var(--border) 30%, var(--border));
+}
+@media (min-width: 768px) { .exp-line { left: 24px; } }
+.exp-item {
+  position: relative; padding-left: 60px; padding-bottom: 48px;
+}
+@media (min-width: 768px) { .exp-item { padding-left: 72px; } }
+.exp-item:last-child { padding-bottom: 0; }
+.exp-dot {
+  position: absolute; left: 12px; top: 4px; z-index: 2;
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 3px solid var(--bg); background: var(--violet);
+  box-shadow: 0 0 0 1px var(--border), 0 0 12px var(--violet-dim);
+}
+.exp-item:not(:first-child) .exp-dot { background: var(--text-3); box-shadow: 0 0 0 1px var(--border); }
+@media (min-width: 768px) { .exp-dot { left: 16px; } }
+.exp-card {
+  padding: 28px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); transition: all 0.3s;
+}
+.exp-card:hover { border-color: var(--border-hover); background: var(--surface-hover); transform: translateX(4px); }
+.exp-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: baseline; justify-content: space-between; margin-bottom: 16px; }
+.exp-head h4 { font-size: 18px; font-weight: 600; color: var(--text); }
+@media (min-width: 640px) { .exp-head h4 { font-size: 20px; } }
+.exp-head .company { color: var(--violet); font-size: 14px; }
+.exp-date {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 4px 12px; border: 1px solid var(--border); border-radius: 999px;
+  font-size: 12px; color: var(--text-2); font-family: "Fraunces", serif;
+}
+.exp-date .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+.exp-date .dot.inactive { background: var(--text-3); }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.exp-bullets li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 15px; color: var(--text-2); line-height: 1.7;
+}
+.exp-bullets li::before {
+  content: ''; flex-shrink: 0; margin-top: 10px;
+  width: 4px; height: 4px; border-radius: 50%; background: var(--violet);
+}
+
+/* Featured Work */
+.work-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 768px) { .work-grid { grid-template-columns: 1fr 1fr; } }
+.work-card {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; background: var(--surface);
+  transition: all 0.4s; text-decoration: none; color: inherit;
+  display: flex; flex-direction: column;
+}
+.work-card:hover { border-color: var(--border-hover); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.work-img {
+  aspect-ratio: 490/300; overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.work-img.bg1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+.work-img.bg2 { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%); }
+.work-img .pattern {
+  position: absolute; inset: 0; opacity: 0.3;
+  background-image: radial-gradient(circle at 25% 25%, rgba(146,130,248,0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 75% 75%, rgba(243,202,77,0.2) 0%, transparent 50%);
+}
+.work-img .work-icon {
+  position: relative; z-index: 2;
+  font-family: "Fraunces", serif; font-size: 48px; font-weight: 300;
+  color: rgba(255,255,255,0.3); letter-spacing: 0.1em;
+}
+.work-img .work-tag {
+  position: absolute; top: 16px; left: 16px; z-index: 3;
+  padding: 4px 12px; border-radius: 999px;
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(10px);
+  font-size: 11px; color: var(--text); font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.work-body { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+.work-body h4 { font-size: 20px; font-weight: 600; color: var(--text); }
+.work-body .roles { font-size: 14px; color: var(--text-2); }
+.work-body .arrow-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 13px; color: var(--violet); }
+.work-body .arrow-row svg { width: 14px; height: 14px; transition: transform 0.3s; }
+.work-card:hover .arrow-row svg { transform: translateX(4px); }
+
+/* Education */
+.edu-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+@media (min-width: 640px) { .edu-grid { grid-template-columns: 1fr 1fr; } }
+.edu-card {
+  padding: 32px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); transition: all 0.3s; position: relative; overflow: hidden;
+}
+.edu-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gradient); opacity: 0; transition: opacity 0.3s;
+}
+.edu-card:hover { border-color: var(--border-hover); transform: translateY(-4px); }
+.edu-card:hover::after { opacity: 1; }
+.edu-date {
+  font-family: "Fraunces", serif; font-size: 14px; color: var(--gold);
+  margin-bottom: 12px; letter-spacing: 0.05em;
+}
+.edu-card h4 { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.edu-card p { font-size: 15px; color: var(--text-2); }
+.edu-card .level {
+  display: inline-block; margin-top: 12px;
+  padding: 4px 10px; border-radius: 6px; font-size: 12px;
+  background: var(--violet-dim); color: var(--violet); font-weight: 500;
+}
+
+/* Projects */
+.proj-section { display: flex; flex-direction: column; gap: 48px; }
+.proj-group { display: flex; flex-direction: column; gap: 16px; }
+.proj-group-label {
+  font-family: "Fraunces", serif; font-size: 13px; font-weight: 500;
+  color: var(--text-2); letter-spacing: 2px; text-transform: uppercase;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.proj-items { display: flex; flex-direction: column; }
+.proj-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 0; border-bottom: 1px solid var(--border);
+  text-decoration: none; color: inherit; transition: all 0.3s;
+  cursor: pointer;
+}
+.proj-item:last-child { border-bottom: none; }
+.proj-item:hover { padding-left: 12px; }
+.proj-item:hover .proj-name { color: var(--violet); }
+.proj-item:hover .proj-arrow { transform: translateX(6px) rotate(-45deg); opacity: 1; }
+.proj-left { display: flex; align-items: center; gap: 16px; }
+.proj-num {
+  font-family: "Fraunces", serif; font-size: 13px; color: var(--text-3);
+  font-weight: 400; min-width: 24px;
+}
+.proj-name { font-size: 18px; font-weight: 500; color: var(--text); transition: color 0.3s; }
+@media (min-width: 640px) { .proj-name { font-size: 22px; } }
+.proj-right { display: flex; align-items: center; gap: 12px; }
+.proj-tag {
+  padding: 4px 10px; border-radius: 6px; font-size: 12px;
+  background: var(--surface); border: 1px solid var(--border); color: var(--text-3);
+}
+.proj-arrow {
+  width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border); border-radius: 50%;
+  opacity: 0.5; transition: all 0.3s;
+}
+.proj-arrow svg { width: 14px; height: 14px; stroke: var(--text); }
+
+/* CTA */
+.cta {
+  padding: 80px 0; text-align: center; position: relative;
+}
+.cta-inner {
+  padding: 64px 32px; border: 1px solid var(--border); border-radius: 24px;
+  background: var(--surface); position: relative; overflow: hidden;
+}
+.cta-inner::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle at center, var(--violet-dim) 0%, transparent 60%);
+  animation: ctaGlow 8s ease-in-out infinite;
+}
+@keyframes ctaGlow { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+.cta h2 {
+  font-family: "Noto Serif SC", serif; font-size: 32px; font-weight: 600;
+  color: var(--text); margin-bottom: 16px; position: relative; z-index: 2;
+}
+@media (min-width: 640px) { .cta h2 { font-size: 40px; } }
+.cta p { font-size: 17px; color: var(--text-2); margin-bottom: 32px; position: relative; z-index: 2; }
+.cta .btn-primary { position: relative; z-index: 2; }
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border); padding: 40px 0; position: relative; z-index: 2;
+}
+.footer-inner { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+.footer-logo {
+  font-family: "Fraunces", "Noto Serif SC", serif; font-size: 18px; font-weight: 500; color: var(--text);
+}
+.footer-logo span { color: var(--violet); }
+.footer-copy { font-size: 13px; color: var(--text-3); }
+.footer-links { display: flex; gap: 16px; }
+.footer-links a {
+  width: 40px; height: 40px; border: 1px solid var(--border); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-2); transition: all 0.3s; text-decoration: none;
+}
+.footer-links a:hover { border-color: var(--violet); color: var(--violet); transform: translateY(-2px); }
+.footer-links svg { width: 18px; height: 18px; }
+
+/* Reveal animation */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Hero load animation */
+.hero-anim { opacity: 0; transform: translateY(20px); animation: heroIn 0.8s ease forwards; }
+.hero-anim-1 { animation-delay: 0.1s; }
+.hero-anim-2 { animation-delay: 0.25s; }
+.hero-anim-3 { animation-delay: 0.4s; }
+.hero-anim-4 { animation-delay: 0.55s; }
+.hero-anim-5 { animation-delay: 0.7s; }
+.hero-anim-6 { animation-delay: 0.85s; }
+@keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- Ambient background -->
+<div class="ambient">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">张<span>百川</span></a>
+      <div class="nav-links">
+        <a href="#about">关于</a>
+        <a href="#experience">经历</a>
+        <a href="#work">作品</a>
+        <a href="#education">教育</a>
+        <a href="#projects">项目</a>
+      </div>
+      <a href="mailto:m15827442533@163.com" class="btn-ghost" style="padding:10px 20px; font-size:14px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        联系我
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-tag hero-anim hero-anim-1">
+          <span class="dot"></span>
+          当前在职 · 可接受交流
+        </div>
+        <h1 class="hero-anim hero-anim-2">张百川</h1>
+        <p class="hero-subtitle hero-anim hero-anim-3">
+          一名深耕教育垂直领域的 <span class="gradient-text" style="font-family:'Noto Serif SC',serif; font-style:italic; font-weight:600;">AI产品经理</span> — 
+          具备医疗教育产品 0-1 全生命周期管理经验,善于将 AI 技术与教育场景深度融合,驱动产品创新。
+        </p>
+        <div class="hero-meta hero-anim hero-anim-4">
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            武汉
+          </div>
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            6+ 年经验
+          </div>
+          <div class="hero-meta-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            AI · 教育 · 医疗
+          </div>
+        </div>
+        <div class="hero-actions hero-anim hero-anim-5">
+          <a href="mailto:m15827442533@163.com" class="btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5z"/></svg>
+            联系我
+          </a>
+          <a href="https://github.com/ZBCs-StudioCr-CN/joblens" target="_blank" class="btn-ghost">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual hero-anim hero-anim-6">
+        <div class="avatar-ring">
+          <div class="avatar-inner">
+            <span class="avatar-char">张</span>
+          </div>
+          <span class="avatar-status"></span>
+          <div class="float-badge badge-1">
+            <span class="icon-dot" style="background:var(--violet);"></span>
+            AI产品
+          </div>
+          <div class="float-badge badge-2">
+            <span class="icon-dot" style="background:var(--gold);"></span>
+            0-1搭建
+          </div>
+          <div class="float-badge badge-3">
+            <span class="icon-dot" style="background:#22c55e;"></span>
+            RAG / Agent
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-ind">
+    <div class="mouse"></div>
+    <span>向下滚动</span>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="section-pad">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">关于我</div>
+      <h2 class="section-title">将 AI 技术转化为<br>真实的教育产品力</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal reveal-delay-1">
+        <p>
+          你好,我是 <span class="marker">张百川</span> — 一名 <span class="highlight">AI产品经理</span>,专注于教育垂直领域的产品创新与落地。
+        </p>
+        <p>
+          曾就职于武汉华工智云、金英杰医学、康圣环球、北京贝瑞和康,主导多个 AI 教育产品的设计、研发与上线。具备从需求洞察、产品规划到 MVP 验证、规模落地的全链路实战经验。
+        </p>
+        <p>
+          擅长将 <span class="highlight">RAG、Agent、LLM</span> 等 AI 技术融入教学场景,构建"教学-练习-考核-复盘"智能化闭环。在金英杰医学期间,核心学生智能分析系统使职业医师考核通过率提升 28%;在华工智云,独立完成 Agent-AI 数字人老师授课产品的设计、MVP、测试与上线。
+        </p>
+        <p>
+          相信好的产品源于对场景的深度理解与对技术的恰当运用 — 让 AI 真正服务于人,而非炫技。
+        </p>
+      </div>
+      <div class="skills-card reveal reveal-delay-2">
+        <div class="skills-title">核心技能</div>
+        <div class="skills-list">
+          <span class="skill-badge">AI产品管理</span>
+          <span class="skill-badge">教育垂直领域</span>
+          <span class="skill-badge">医疗信息化</span>
+          <span class="skill-badge">RAG / Agent 设计</span>
+          <span class="skill-badge">LLM 应用落地</span>
+          <span class="skill-badge">需求分析与PRD</span>
+          <span class="skill-badge">数据可视化分析</span>
+          <span class="skill-badge">跨部门协同</span>
+          <span class="skill-badge">产品0-1搭建</span>
+          <span class="skill-badge">Web Coding</span>
+          <span class="skill-badge">教学管理</span>
+          <span class="skill-badge">BI / SQL / Python</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience" class="section-pad">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">职业经历</div>
+      <h2 class="section-title">6年深耕<br>从客服管理到AI产品</h2>
+    </div>
+    <div class="exp-list">
+      <div class="exp-line"></div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-head">
+            <div>
+              <h4>产品经理</h4>
+              <span class="company">武汉华工智云科技有限公司</span>
+            </div>
+            <div class="exp-date"><span class="dot"></span>2026.3 – 至今 · 武汉</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>负责 AI 职教工场产品全生命周期管理,覆盖教学数据可视化、教师素养评价、实训教学全流程、学生评价体系等核心模块</li>
+            <li>主导学生专属素养过程评价体系搭建,完成通用岗位能力维度评价模型设计及特定岗位适配评价</li>
+            <li>主导数据看板重构优化,精简冗余页面,降低数据运行读取和计算成本</li>
+            <li>独立完成职教工厂 Agent-AI 数字人老师授课产品的设计、MVP、测试与上线</li>
+            <li>输出平台教师版产品使用全流程文档,搭建标准化操作指引与教学场景应用方案</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-head">
+            <div>
+              <h4>临床教育项目负责人</h4>
+              <span class="company">金英杰医学 · 人民医学网</span>
+            </div>
+            <div class="exp-date"><span class="dot inactive"></span>2024.5 – 2026.3 · 武汉</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>主导临床医学教育项目从零到一搭建,1年内实现从 0 到 60万课程业绩突破,累计服务湖北省 20 余家重点医院及卫生机构</li>
+            <li>牵头设计并落地医疗教育信息化整体解决方案,包括智能题库系统、在线课程平台及 AI 考试模拟系统</li>
+            <li>核心学生智能分析系统使当年职业医师考核通过率提升 <span style="color:var(--gold); font-weight:600;">28%</span></li>
+            <li>将 RAG、Agent 等 AI 技术融入教育产品设计,实现"教学-练习-考核-复盘"智能化闭环</li>
+            <li>通过 SQL、Python 进行多维度数据采集与分析,利用 BI 工具形成可视化报告,C端产品引流效率提升 <span style="color:var(--gold); font-weight:600;">25%</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-head">
+            <div>
+              <h4>项目经理</h4>
+              <span class="company">康圣环球</span>
+            </div>
+            <div class="exp-date"><span class="dot inactive"></span>2022.5 – 2024.5 · 武汉</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>牵头医疗检测服务数字化升级项目,联合 4 个部门梳理业务痛点,完成"在线下单-物流追踪-电子报告-满意度评价"全流程闭环设计</li>
+            <li>主导开发标准化服务 APP,覆盖订单录入、进度跟踪、产品检索及客户服务核心场景</li>
+            <li>协调分子公司、医院、研发、物流等多端资源,建立高效协作机制</li>
+            <li>设计部门人员绩效体系及年度预算方案,有效保障产品运营效率与团队战斗力</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-head">
+            <div>
+              <h4>客服管理</h4>
+              <span class="company">北京贝瑞和康</span>
+            </div>
+            <div class="exp-date"><span class="dot inactive"></span>2019.10 – 2022.5 · 北京</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>全面负责销售订单全流程跟踪与客户服务工作,处理异常订单及售前售后咨询</li>
+            <li>对接生产、物流、财务等多部门,保障跨部门协同效率,优化客户服务体验</li>
+            <li>每日统计销售及客户行为数据,整合形成日/周/月可视化报告,为业务决策提供数据支撑</li>
+            <li>负责试剂耗材库存管理,通过数据分析优化资源配置,降低运营成本 <span style="color:var(--gold); font-weight:600;">15%</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Work -->
+<section id="work" class="section-pad">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">精选作品</div>
+      <h2 class="section-title">代表性项目</h2>
+    </div>
+    <div class="work-grid">
+      <a href="https://github.com/ZBCs-StudioCr-CN/joblens" target="_blank" class="work-card reveal reveal-delay-1">
+        <div class="work-img bg1">
+          <div class="pattern"></div>
+          <span class="work-tag">AI · 求职</span>
+          <span class="work-icon">JobLens</span>
+        </div>
+        <div class="work-body">
+          <h4>JobLens — AI求职助手</h4>
+          <p class="roles">产品设计 · 原型开发</p>
+          <div class="arrow-row">
+            查看项目
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </div>
+      </a>
+      <div class="work-card reveal reveal-delay-2">
+        <div class="work-img bg2">
+          <div class="pattern"></div>
+          <span class="work-tag">AI · 职业教育</span>
+          <span class="work-icon">2.0</span>
+        </div>
+        <div class="work-body">
+          <h4>AI职教工厂2.0</h4>
+          <p class="roles">产品规划 · 需求设计</p>
+          <div class="arrow-row">
+            了解更多
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Education -->
+<section id="education" class="section-pad">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">教育经历</div>
+      <h2 class="section-title">学历背景</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-date">2022.9 — 2025.6</div>
+        <h4>工商管理</h4>
+        <p>武汉科技大学</p>
+        <span class="level">成人本科</span>
+      </div>
+      <div class="edu-card reveal reveal-delay-2">
+        <div class="edu-date">2014.9 — 2018.6</div>
+        <h4>电子信息工程</h4>
+        <p>武汉软件工程职业学院</p>
+        <span class="level">全日制大专(统招)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="section-pad">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-label">项目总览</div>
+      <h2 class="section-title">更多项目</h2>
+    </div>
+    <div class="proj-section">
+      <div class="proj-group reveal">
+        <div class="proj-group-label">企业项目案例</div>
+        <div class="proj-items">
+          <div class="proj-item">
+            <div class="proj-left">
+              <span class="proj-num">01</span>
+              <span class="proj-name">住院医师规范化培训能力提升项目</span>
+            </div>
+            <div class="proj-right">
+              <div class="proj-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </div>
+            </div>
+          </div>
+          <div class="proj-item">
+            <div class="proj-left">
+              <span class="proj-num">02</span>
+              <span class="proj-name">医疗检测服务数字化升级项目</span>
+            </div>
+            <div class="proj-right">
+              <div class="proj-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-group reveal reveal-delay-1">
+        <div class="proj-group-label">个人项目</div>
+        <div class="proj-items">
+          <a href="https://github.com/ZBCs-StudioCr-CN/joblens" target="_blank" class="proj-item">
+            <div class="proj-left">
+              <span class="proj-num">01</span>
+              <span class="proj-name">JobLens — AI求职助手</span>
+            </div>
+            <div class="proj-right">
+              <div class="proj-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </div>
+            </div>
+          </a>
+          <div class="proj-item">
+            <div class="proj-left">
+              <span class="proj-num">02</span>
+              <span class="proj-name">AI数字人平台</span>
+            </div>
+            <div class="proj-right">
+              <div class="proj-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </div>
+            </div>
+          </div>
+          <div class="proj-item">
+            <div class="proj-left">
+              <span class="proj-num">03</span>
+              <span class="proj-name">AI职教工厂2.0</span>
+            </div>
+            <div class="proj-right">
+              <div class="proj-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </div>
+            </div>
+          </div>
+          <div class="proj-item">
+            <div class="proj-left">
+              <span class="proj-num">04</span>
+              <span class="proj-name" style="color:var(--text-3);">AI时代电商实训平台</span>
+            </div>
+            <div class="proj-right">
+              <span class="proj-tag">即将上线</span>
+            </div>
+          </div>
+          <div class="proj-item">
+            <div class="proj-left">
+              <span class="proj-num">05</span>
+              <span class="proj-name" style="color:var(--text-3);">医途通</span>
+            </div>
+            <div class="proj-right">
+              <span class="proj-tag">即将上线</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2>有合作想法?</h2>
+      <p>无论是 AI 产品咨询、教育信息化方案,还是项目合作 — 欢迎来聊。</p>
+      <a href="mailto:m15827442533@163.com" class="btn-primary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        发送邮件
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">张<span>百川</span></div>
+      <p class="footer-copy">2026 © 张百川个人作品集 — 保留所有权利</p>
+      <div class="footer-links">
+        <a href="https://github.com/ZBCs-StudioCr-CN/joblens" target="_blank" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+        <a href="mailto:m15827442533@163.com" title="邮箱">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
+  }
+});
+
+// Intersection Observer for reveal animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
