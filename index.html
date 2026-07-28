@@ -489,6 +489,75 @@ footer {
 .hero-anim-5 { animation-delay: 0.7s; }
 .hero-anim-6 { animation-delay: 0.85s; }
 @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+
+/* Email Modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(10,10,15,0.7);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-card {
+  background: var(--bg-2); border: 1px solid var(--border-hover);
+  border-radius: 20px; padding: 40px 36px;
+  max-width: 380px; width: calc(100% - 48px);
+  text-align: center; position: relative;
+  transform: scale(0.9) translateY(20px); transition: transform 0.3s;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+}
+.modal-overlay.active .modal-card { transform: scale(1) translateY(0); }
+.modal-card .modal-icon {
+  width: 56px; height: 56px; margin: 0 auto 20px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--violet-dim); border: 1px solid var(--border);
+}
+.modal-card .modal-icon svg { width: 26px; height: 26px; stroke: var(--violet); }
+.modal-card h3 {
+  font-family: "Noto Serif SC", serif; font-size: 22px; font-weight: 600;
+  color: var(--text); margin-bottom: 8px;
+}
+.modal-card .modal-sub { font-size: 14px; color: var(--text-2); margin-bottom: 24px; }
+.modal-card .email-box {
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+  padding: 14px 20px; border: 1px solid var(--border); border-radius: 12px;
+  background: var(--surface); margin-bottom: 24px;
+}
+.modal-card .email-text {
+  font-family: "Fraunces", serif; font-size: 17px; font-weight: 500;
+  color: var(--text); letter-spacing: 0.02em; word-break: break-all;
+}
+.modal-card .copy-btn {
+  flex-shrink: 0; padding: 6px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text-2); font-size: 12px; font-weight: 500; cursor: pointer;
+  transition: all 0.3s; white-space: nowrap;
+}
+.modal-card .copy-btn:hover { border-color: var(--violet); color: var(--violet); }
+.modal-card .copy-btn.copied { background: var(--violet); color: #fff; border-color: var(--violet); }
+.modal-card .modal-actions { display: flex; gap: 12px; justify-content: center; }
+.modal-card .modal-actions a {
+  flex: 1; padding: 12px 20px; border-radius: 999px; text-decoration: none;
+  font-size: 14px; font-weight: 600; transition: all 0.3s; text-align: center;
+}
+.modal-card .modal-actions .send-mail {
+  background: var(--gradient); color: #0a0a0f;
+}
+.modal-card .modal-actions .send-mail:hover { transform: translateY(-2px); box-shadow: 0 4px 16px var(--violet-dim); }
+.modal-card .modal-actions .close-btn {
+  border: 1px solid var(--border); color: var(--text); background: var(--surface);
+}
+.modal-card .modal-actions .close-btn:hover { border-color: var(--border-hover); background: var(--surface-hover); }
+.modal-close-x {
+  position: absolute; top: 16px; right: 16px;
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-2); cursor: pointer; transition: all 0.3s;
+}
+.modal-close-x:hover { border-color: var(--border-hover); color: var(--text); }
+.modal-close-x svg { width: 16px; height: 16px; }
 </style>
 </head>
 <body>
@@ -512,7 +581,7 @@ footer {
         <a href="#education">教育</a>
         <a href="#projects">项目</a>
       </div>
-      <a href="mailto:m15827442533@163.com" class="btn-ghost" style="padding:10px 20px; font-size:14px;">
+      <a href="javascript:void(0)" onclick="showEmailModal()" class="btn-ghost" style="padding:10px 20px; font-size:14px;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         联系我
       </a>
@@ -549,7 +618,7 @@ footer {
           </div>
         </div>
         <div class="hero-actions hero-anim hero-anim-5">
-          <a href="mailto:m15827442533@163.com" class="btn-primary">
+          <a href="javascript:void(0)" onclick="showEmailModal()" class="btn-primary">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.5 5.5L19 9l-5.5 1.5L12 16l-1.5-5.5L5 9l5.5-1.5z"/></svg>
             联系我
           </a>
@@ -889,9 +958,9 @@ footer {
     <div class="cta-inner reveal">
       <h2>有合作想法?</h2>
       <p>无论是 AI 产品咨询、教育信息化方案,还是项目合作 — 欢迎来聊。</p>
-      <a href="mailto:m15827442533@163.com" class="btn-primary">
+      <a href="javascript:void(0)" onclick="showEmailModal()" class="btn-primary">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        发送邮件
+        联系我
       </a>
     </div>
   </div>
@@ -907,13 +976,35 @@ footer {
         <a href="https://github.com/ZBCs-StudioCr-CN/joblens" target="_blank" title="GitHub">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
         </a>
-        <a href="mailto:m15827442533@163.com" title="邮箱">
+        <a href="javascript:void(0)" onclick="showEmailModal()" title="邮箱">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         </a>
       </div>
     </div>
   </div>
 </footer>
+
+<!-- Email Modal -->
+<div class="modal-overlay" id="emailModal" onclick="if(event.target===this)closeEmailModal()">
+  <div class="modal-card">
+    <div class="modal-close-x" onclick="closeEmailModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </div>
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+    <h3>联系我</h3>
+    <p class="modal-sub">可以通过以下邮箱与我联系</p>
+    <div class="email-box">
+      <span class="email-text">m15827442533@163.com</span>
+      <button class="copy-btn" onclick="copyEmail(this)">复制</button>
+    </div>
+    <div class="modal-actions">
+      <a href="mailto:m15827442533@163.com" class="send-mail">发送邮件</a>
+      <a href="javascript:void(0)" class="close-btn" onclick="closeEmailModal()">关闭</a>
+    </div>
+  </div>
+</div>
 
 <script>
 // Nav scroll effect
@@ -936,6 +1027,30 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Email Modal
+function showEmailModal() {
+  document.getElementById('emailModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeEmailModal() {
+  document.getElementById('emailModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function copyEmail(btn) {
+  navigator.clipboard.writeText('m15827442533@163.com').then(() => {
+    btn.textContent = '已复制';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '复制';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+// ESC to close
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeEmailModal();
+});
 </script>
 
 </body>
