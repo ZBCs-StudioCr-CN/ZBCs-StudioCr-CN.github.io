@@ -1,53 +1,46 @@
-# 张百川个人作品集
+# 张百川 — AI 产品经理 / 全栈开发者
 
-> AI产品经理 / 全栈开发者 — 个人作品集网站
+> 个人作品集 · 职业经历 · 项目展示
 
 **在线预览**：[https://zbcs-studiocr-cn.github.io](https://zbcs-studiocr-cn.github.io)
 
-## 项目简介
+## 个人介绍
 
-个人作品集网站，采用 Warm Editorial Noir 设计风格，展示项目作品、职业技能与工作经历。深暖炭黑底色搭配铜色强调与鼠尾草绿辅助色，衬线标题字体 Fraunces 配合无衬线正文 Noto Sans SC，自定义光标、滚动进度条、渐入动画等微交互。
+我是张百川，AI 产品经理 / 全栈开发者，专注于 AI 产品的从 0 到 1 落地与用户价值创造。
 
-## 技术栈
+从产品定义、交互设计到前后端开发，再到 AI 能力的接入与调优，我习惯端到端地把一个想法变成用户能用的产品。
 
-- **HTML5** — 单文件部署，零依赖
-- **CSS3** — CSS变量主题系统、动画、响应式布局
-- **JavaScript** — 滚动动画、自定义光标、邮件弹窗、项目筛选
-- **GitHub Pages** — 静态托管部署
+## 职业经历
 
-## 功能模块
+| 时间 | 公司 | 职位 |
+|------|------|------|
+| 2024.12 - 至今 | AI职教工厂 | AI产品经理 / 全栈开发 |
+| 2023.06 - 2024.11 | 医途通 | 产品经理 |
+| 2022.03 - 2023.05 | 电商运营 | 独立运营 |
 
-| 模块 | 说明 |
-|------|------|
-| Hero 首屏 | 个人介绍 + 头像 + 联系方式 |
-| 精选作品 | 项目卡片展示，含产品图、能力标签、诞生背景 |
-| 项目总览 | 企业项目案例 + 个人项目列表 |
-| 技能经历 | 职业经历时间线 + 教育背景 |
-| 页脚 | 联系邮箱弹窗（复制/发送/关闭） |
+## 技能
 
-## 项目展示
+- **产品设计**：需求分析、交互设计、原型输出、PRD 撰写
+- **前端开发**：HTML / CSS / JavaScript / TypeScript / React / Next.js
+- **后端开发**：Node.js / Python / API 设计与对接
+- **AI 应用**：Prompt Engineering、Agent 设计、多模型集成、视觉模型应用
+- **工具平台**：飞书多维表格、Coze、Dify、Local AI Gateway
 
-网站收录以下项目：
+## 作品项目
 
-- **Vision Browser Agent** — 纯视觉驱动浏览器自动化框架
-- **AI时代的电商实训平台** — AI驱动的电商运营实训
-- **Local AI Gateway** — 多模型本地AI网关配置工具
-- **JobLens** — AI求职助手
-- **dsh-skill-manager** — DeepSeek Harness可视化Skill管理器
-- **医途通** — 即将上线
+### 精选项目
 
-## 使用方式
+- **Vision Browser Agent** — 纯视觉驱动的浏览器自动化框架，内置 Moondream3 本地推理，零 DOM 依赖
+- **AI 时代的电商实训平台** — AI 驱动的电商运营决策实训，模拟真实经营场景
+- **Local AI Gateway** — 多模型本地 AI 网关配置工具，图形化管理，一键启动
+- **JobLens** — AI 求职助手，轻量化求职辅助工具
+- **dsh-skill-manager** — DeepSeek Harness 可视化 Skill 管理器
+- 更多项目见个人主页
 
-1. 克隆仓库
-   `ash
-   git clone https://github.com/ZBCs-StudioCr-CN/ZBCs-StudioCr-CN.github.io.git
-   `
-2. 用浏览器打开 index.html 即可预览
+## 关于本站
 
-## 部署
+本站为个人作品集主页，收录职业经历、项目作品与技术积累。采用静态单页部署，托管于 GitHub Pages。
 
-网站通过 GitHub Pages 自动部署，访问地址：[https://zbcs-studiocr-cn.github.io](https://zbcs-studiocr-cn.github.io)
+---
 
-## License
-
-MIT
+📧 联系方式：见个人主页「联系我」板块
