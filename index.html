@@ -543,42 +543,67 @@ section { position: relative; padding: 100px 0; }
 }
 
 /* ── EXPERIENCE ─────────────────────────────── */
-.exp-scroller {
+.exp-tabs {
   display: flex;
-  gap: 24px;
+  gap: 6px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--line);
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 4px 4px 18px;
-  margin: 0 -4px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--copper-dim) var(--line);
+  scrollbar-width: none;
 }
-.exp-scroller::-webkit-scrollbar { height: 6px; }
-.exp-scroller::-webkit-scrollbar-track { background: var(--line); border-radius: 99px; }
-.exp-scroller::-webkit-scrollbar-thumb { background: var(--copper-dim); border-radius: 99px; }
-.exp-scroller::-webkit-scrollbar-thumb:hover { background: var(--copper); }
-.exp-item {
-  flex: 0 0 560px;
-  scroll-snap-align: start;
-  display: flex;
-}
-.exp-hint {
-  font-family: var(--mono);
-  font-size: 11px;
+.exp-tabs::-webkit-scrollbar { display: none; }
+.exp-tab {
+  flex: 1;
+  min-width: 140px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 12px 10px 14px;
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
   color: var(--ink-3);
-  letter-spacing: 0.06em;
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  white-space: nowrap;
+  transition: color 0.25s, border-color 0.25s, background 0.25s;
 }
-.exp-hint::before {
-  content: '';
-  width: 24px; height: 1px;
-  background: var(--copper);
+.exp-tab .co {
+  display: block;
+  font-family: var(--serif);
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+.exp-tab .yr {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+.exp-tab:hover {
+  color: var(--ink-2);
+}
+.exp-tab.active {
+  color: var(--copper);
+  border-bottom-color: var(--copper);
+}
+.exp-viewport {
+  overflow: hidden;
+  transition: height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.exp-track {
+  display: flex;
+  align-items: flex-start;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.exp-item {
+  flex: 0 0 100%;
+  min-width: 0;
 }
 @media (max-width: 768px) {
-  .exp-item { flex: 0 0 86vw; }
+  .exp-tab { flex: 0 0 auto; min-width: 118px; }
+  .exp-tab .co { font-size: 13px; }
 }
 .exp-card {
   width: 100%;
@@ -1111,7 +1136,7 @@ footer {
         </div>
         <div class="hero-meta-item">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          6+ 年经验
+          7+ 年经验
         </div>
         <div class="hero-meta-item">
           <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -1184,9 +1209,28 @@ footer {
 <section id="experience">
   <div class="section-inner">
     <div class="section-label reveal">职业经历</div>
-    <h2 class="section-title reveal reveal-delay-1">6年深耕<br>从客服管理到<em>AI产品</em></h2>
-    <div class="exp-scroller">
-      <div class="exp-item reveal">
+    <h2 class="section-title reveal reveal-delay-1">7年深耕<br>从客服管理到<em>AI产品</em></h2>
+    <div class="exp-tabs reveal reveal-delay-2" role="tablist">
+      <button class="exp-tab active" role="tab" data-idx="0">
+        <span class="co">华工智云</span>
+        <span class="yr">2026.3 – 至今</span>
+      </button>
+      <button class="exp-tab" role="tab" data-idx="1">
+        <span class="co">金英杰医学</span>
+        <span class="yr">2024.5 – 2026.3</span>
+      </button>
+      <button class="exp-tab" role="tab" data-idx="2">
+        <span class="co">康圣环球</span>
+        <span class="yr">2022.5 – 2024.5</span>
+      </button>
+      <button class="exp-tab" role="tab" data-idx="3">
+        <span class="co">贝瑞和康</span>
+        <span class="yr">2019.10 – 2022.5</span>
+      </button>
+    </div>
+    <div class="exp-viewport reveal reveal-delay-2" id="expViewport">
+      <div class="exp-track" id="expTrack">
+      <div class="exp-item">
         <div class="exp-card">
           <div class="exp-head">
             <div>
@@ -1206,7 +1250,7 @@ footer {
         </div>
       </div>
 
-      <div class="exp-item reveal">
+      <div class="exp-item">
         <div class="exp-card">
           <div class="exp-head">
             <div>
@@ -1224,7 +1268,7 @@ footer {
         </div>
       </div>
 
-      <div class="exp-item reveal">
+      <div class="exp-item">
         <div class="exp-card">
           <div class="exp-head">
             <div>
@@ -1242,7 +1286,7 @@ footer {
         </div>
       </div>
 
-      <div class="exp-item reveal">
+      <div class="exp-item">
         <div class="exp-card">
           <div class="exp-head">
             <div>
@@ -1258,8 +1302,8 @@ footer {
           </ul>
         </div>
       </div>
+      </div>
     </div>
-    <div class="exp-hint reveal">左右滑动查看完整履历 · 共 4 段</div>
   </div>
 </section>
 
@@ -1595,6 +1639,23 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Experience segmented tabs ──────────────────
+const expTabs = [...document.querySelectorAll('.exp-tab')];
+const expTrack = document.getElementById('expTrack');
+const expViewport = document.getElementById('expViewport');
+const expItems = [...expTrack.querySelectorAll('.exp-item')];
+function showExp(i) {
+  expTabs.forEach((t, k) => t.classList.toggle('active', k === i));
+  expTrack.style.transform = `translateX(-${i * 100}%)`;
+  expViewport.style.height = expItems[i].offsetHeight + 'px';
+}
+expTabs.forEach((t, i) => t.addEventListener('click', () => showExp(i)));
+window.addEventListener('load', () => showExp(0));
+window.addEventListener('resize', () => {
+  const i = expTabs.findIndex(t => t.classList.contains('active'));
+  showExp(i < 0 ? 0 : i);
+});
 
 // ── Cursor follower ────────────────────────────
 const dot = document.getElementById('cursorDot');
