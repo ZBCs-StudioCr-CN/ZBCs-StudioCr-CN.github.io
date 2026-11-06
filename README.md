@@ -30,12 +30,20 @@
 
 ### 精选项目
 
+> 🔥 **招商中** · 重点项目
+
+- **高中数学真题漏洞扫描 · 培训机构续费辅助系统** — 面向高中培训机构的续费辅助系统 + 智能化运营方案。以高中数学 271 课标考点为核心，提供学情诊断、续费证据链、教师话术体系与续费 SOP，让机构续费从「靠嘴说」变成「靠数据」。
+  - 🔗 [查看招商方案](https://zbcs-studiocr-cn.github.io/zhenti-scan-prototype/biz.html)
+
+- **DSH Skill Manager — DeepSeek Harness 技能管理器** — 为 DeepSeek Harness 技能库增加智能分类与智能使用建议层。按产品交付阶段智能归类，为每个技能生成一句话使用建议，源文件零侵入。
+  - 🔗 [查看 GitHub](https://github.com/ZBCs-StudioCr-CN/dsh-skill-manager)
+
 - **Vision Browser Agent** — 纯视觉驱动的浏览器自动化框架，内置 Moondream3 本地推理，零 DOM 依赖
 - **AI 时代的电商实训平台** — AI 驱动的电商运营决策实训，模拟真实经营场景
 - **Local AI Gateway** — 多模型本地 AI 网关配置工具，图形化管理，一键启动
 - **JobLens** — AI 求职助手，轻量化求职辅助工具
-- **dsh-skill-manager** — DeepSeek Harness 可视化 Skill 管理器
-- 更多项目见个人主页
+
+更多项目见[个人主页](https://zbcs-studiocr-cn.github.io)
 
 ## 关于本站
 
