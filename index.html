@@ -543,37 +543,45 @@ section { position: relative; padding: 100px 0; }
 }
 
 /* ── EXPERIENCE ─────────────────────────────── */
-.exp-list {
-  position: relative;
-  max-width: 800px;
+.exp-scroller {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 4px 4px 18px;
+  margin: 0 -4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--copper-dim) var(--line);
 }
-.exp-line {
-  position: absolute;
-  left: 12px; top: 8px; bottom: 8px;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--copper), var(--line));
-}
+.exp-scroller::-webkit-scrollbar { height: 6px; }
+.exp-scroller::-webkit-scrollbar-track { background: var(--line); border-radius: 99px; }
+.exp-scroller::-webkit-scrollbar-thumb { background: var(--copper-dim); border-radius: 99px; }
+.exp-scroller::-webkit-scrollbar-thumb:hover { background: var(--copper); }
 .exp-item {
-  position: relative;
-  padding-left: 48px;
-  margin-bottom: 48px;
+  flex: 0 0 560px;
+  scroll-snap-align: start;
+  display: flex;
 }
-.exp-item:last-child { margin-bottom: 0; }
-.exp-dot {
-  position: absolute;
-  left: 6px; top: 8px;
-  width: 13px; height: 13px;
-  border-radius: 50%;
+.exp-hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.06em;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.exp-hint::before {
+  content: '';
+  width: 24px; height: 1px;
   background: var(--copper);
-  border: 3px solid var(--bg);
-  box-shadow: 0 0 0 1px var(--copper);
-  z-index: 2;
 }
-.exp-dot.inactive {
-  background: var(--bg-3);
-  box-shadow: 0 0 0 1px var(--line-2);
+@media (max-width: 768px) {
+  .exp-item { flex: 0 0 86vw; }
 }
 .exp-card {
+  width: 100%;
   background: var(--bg-2);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -1177,31 +1185,28 @@ footer {
   <div class="section-inner">
     <div class="section-label reveal">职业经历</div>
     <h2 class="section-title reveal reveal-delay-1">6年深耕<br>从客服管理到<em>AI产品</em></h2>
-    <div class="exp-list">
-      <div class="exp-line"></div>
-
+    <div class="exp-scroller">
       <div class="exp-item reveal">
-        <div class="exp-dot"></div>
         <div class="exp-card">
           <div class="exp-head">
             <div>
-              <h4>产品经理</h4>
+              <h4>AI 产品经理</h4>
               <span class="company">武汉华工智云科技有限公司</span>
             </div>
             <div class="exp-date"><span class="dot"></span>2026.3 – 至今 · 武汉</div>
           </div>
           <ul class="exp-bullets">
-            <li>负责 AI 职教工场产品全生命周期管理，覆盖教学数据可视化、教师素养评价、实训教学全流程、学生评价体系等核心模块</li>
-            <li>主导学生专属素养过程评价体系搭建，完成通用岗位能力维度评价模型设计及特定岗位适配评价</li>
-            <li>主导数据看板重构优化，精简冗余页面，降低数据运行读取和计算成本</li>
-            <li>独立完成职教工厂 Agent-AI 数字人老师授课产品的设计、MVP、测试与上线</li>
-            <li>输出平台教师版产品使用全流程文档，搭建标准化操作指引与教学场景应用方案</li>
+            <li>负责 AI 职教工场教师端 &amp; 学生端 AI 模块全生命周期管理，覆盖 AI 教学辅助、AI 素养评价、AI 数字人教学、教学数据可视化、教学辅助 Agent 与知识库产品</li>
+            <li>主导教师素养过程评价体系落地，针对 13 个目标岗位设计岗位匹配权重规则，落地「AI 初评 + 教师终审」双模式，搭建评测样本库持续优化初评准确率</li>
+            <li>主导职教私有知识库平台设计落地，作为教学系统数据底座，为 AI 智能体与 AI 评价提供规范数据源，通过准入、版本、溯源闭环管控 AI 幻觉风险</li>
+            <li>设计落地教师端 AI 试卷生成、备课助手、思维导图智能体，学生端知识点解析、作业质检、简历生成智能体</li>
+            <li>独立完成 AI 数字人做课平台设计，实现课件匹配与课程视频生成；主导教师端 6 个教学数据页面重构，交付周期缩短 3 个月</li>
+            <li>输出《AI 职教工场应用平台产品使用文档（教师版）》V2.0，带动教师端新用户激活率提升 40%</li>
           </ul>
         </div>
       </div>
 
       <div class="exp-item reveal">
-        <div class="exp-dot inactive"></div>
         <div class="exp-card">
           <div class="exp-head">
             <div>
@@ -1211,12 +1216,50 @@ footer {
             <div class="exp-date"><span class="dot inactive"></span>2024.5 – 2026.3 · 武汉</div>
           </div>
           <ul class="exp-bullets">
-            <li>主导临床医学教育项目从零到一搭建，1年内实现从 0 到 60万课程业绩突破，累计服务湖北省 20 余家重点医院及卫生机构</li>
-            <li>牵头设计并落地医疗教育信息化整体解决方案，包括智能题库系统、在线课程平台及 AI 考试模拟系统</li>
+            <li>主导临床医学教育项目从零到一搭建，1 年内实现从 0 到 60 万课程业绩突破，累计服务湖北省 20 余家重点医院及卫生机构</li>
+            <li>牵头医疗教育信息化解决方案，设计智能题库、在线课程与 AI 模拟考试系统，将 RAG 知识库与大模型能力融入医学培训场景</li>
+            <li>核心学生智能分析系统指导学生学习，执业医师考核通过率由 61% 提升至 89%（+28%），落地湖北省第三人民医院</li>
+            <li>通过 SQL、Python 完成多维度数据采集分析并输出可视化报告，C 端数据引流效率月同比提升 25%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-card">
+          <div class="exp-head">
+            <div>
+              <h4>项目经理</h4>
+              <span class="company">康圣环球</span>
+            </div>
+            <div class="exp-date"><span class="dot inactive"></span>2022.5 – 2024.5 · 武汉</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>牵头医疗检测服务数字化升级项目，联合 4 个部门梳理业务痛点，完成「在线下单 – 物流追踪 – 电子报告 – 满意度评价」全流程闭环设计</li>
+            <li>主导开发标准化服务 APP，覆盖订单录入、进度跟踪、产品检索与客户服务核心场景，实现从需求规划到落地交付的全周期管理</li>
+            <li>协调分子公司、医院、研发、物流多端资源，建立跨部门协作机制，输出深度业务分析报告推动产品持续优化</li>
+            <li>设计部门人员绩效体系及年度预算方案，保障产品运营效率与团队战斗力</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-card">
+          <div class="exp-head">
+            <div>
+              <h4>客服管理</h4>
+              <span class="company">北京贝瑞和康</span>
+            </div>
+            <div class="exp-date"><span class="dot inactive"></span>2019.10 – 2022.5 · 北京</div>
+          </div>
+          <ul class="exp-bullets">
+            <li>全面负责销售订单全流程跟踪与客户服务，处理异常订单及售前售后咨询，建立高效客户需求响应机制</li>
+            <li>对接生产、物流、财务等多部门，保障跨部门协同效率，持续优化客户服务体验</li>
+            <li>每日统计销售及客户行为数据，整合形成日 / 周 / 月可视化报告，为业务决策及流程优化提供数据支撑</li>
           </ul>
         </div>
       </div>
     </div>
+    <div class="exp-hint reveal">左右滑动查看完整履历 · 共 4 段</div>
   </div>
 </section>
 
